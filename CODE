@@ -1,0 +1,39 @@
+#Import libraries
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+
+#Random Data from ChatGPT
+
+data = {'Name':('Alice', 'Bob', 'Charlie', 'Diana', 'Evelyn', 'Frank', 'Grace', 'Hector', 'Ivy', 'Jack', 'Karen', 'Liam', 'Mona', 'Nina', 'Oscar', 'Paul', 'Quinn', 'Rachel', 'Sam', 'Tina', 'Ursula', 'Victor', 'Wendy', 'Xander', 'Yara', 'Zane', 'Alan', 'Beatrice', 'Carl', 'Dorothy', 'Edwin', 'Fiona', 'George', 'Holly', 'Ian', 'Julia', 'Kyle', 'Laura', 'Martin', 'Natalie', 'Oliver', 'Peter', 'Rita', 'Steven', 'Tracy', 'Uma', 'Violet', 'Walter', 'Xenia', 'Yvonne'),
+        'Weight': (80.33, 64.34, 96.71, 87.35, 78.50, 87.85, 96.44, 63.69, 59.65, 65.80, 71.33, 71.93, 56.94, 63.85, 77.69, 80.52, 86.84, 69.28, 85.05, 62.38, 77.80, 76.26, 63.08, 92.38, 54.41, 61.32, 94.61, 94.97, 77.70, 87.73, 93.28, 99.88, 85.96, 82.74, 70.34, 79.98, 85.71, 96.39, 80.58, 57.85, 93.99, 92.36, 69.62, 92.96, 51.61, 99.33, 51.37, 69.17, 80.93, 88.79),
+        'Salary': (32558.14, 45553.20, 36130.07, 25053.20, 36059.61, 24810.38, 37651.66, 33138.33, 49681.77, 48186.70, 20777.69, 29167.64, 11558.84, 42101.24, 27836.50, 45919.90, 16560.78, 22048.80, 23470.98, 29252.94, 27642.25, 25080.92, 17115.67, 27755.64, 42756.53, 19155.23, 42618.86, 24593.57, 33717.90, 15212.26, 21715.12, 12557.68, 10298.79, 37960.48, 38314.37, 30754.60, 49549.68, 20369.54, 42243.55, 46329.25, 10627.98, 29512.05, 24541.25, 43670.40, 49467.19, 20941.98, 28010.76, 41755.06, 22614.07, 47752.38)
+        }
+
+#Convert to Dataframe
+
+df = pd.DataFrame(data)
+
+print(df)
+
+# Peso: A y Salario: B (quiero ver si el peso depende del salario)
+# a >peso --> >salario. si A depende de B: Salario (VAR DEP Y) Peso (VAR INDEP X)
+# Y = bx_1 + bx_2... + € // Salario = Peso.b + €rror
+
+Y = df['Salario']
+X = df[['Peso']]
+
+#Create and Train the model
+model = LinearRegression()
+model.fit(X,Y)
+
+#Predict model
+Y_pred = model.predict(X)
+
+#Draw the graph with plt (scatter: dots / plot: line)
+plt.scatter (X, Y, color = 'blue', label = 'Datos Peso / Salario')
+plt.plot(X, Y_pred, color = 'red', linewidth = 2, label = 'Línea de regresión' )
+
+plt.show()
